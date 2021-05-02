@@ -1,0 +1,39 @@
+<!-- Extend the base template -->
+{% extends "base.html" %}
+
+<!-- Title block -->
+{% block title %}Order{% endblock %}
+
+<!-- Content block -->
+{% block content %}
+<div class="row">
+  <div class="col-4">
+    <img src="static/coffee-side.jpeg" alt="coffee" class="img-fluid" />
+  </div>
+  <div class="col-8">
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">Your order</h5>
+              <p class="card-text">The total amount of your order is <b>{{ total }} DKK</b></p>
+              <ul class="list-group list-group">
+                {% for item in items %}
+                    <li class="list-group-item">
+                      <div class="row">
+                        <div class="col-6">
+                          <h5>{{ item[0].name }}</h5>
+                        </div>
+                        <div class="col-6">
+                          <h6 class="text-muted text-end">{{ item[2]}} x {{ item[1]}} DKK</h6>
+                        </div>
+                      </div>
+                    </li>
+                {% endfor %}
+              </ul>
+          </div>
+      </div>
+
+      
+    </form>
+  </div>
+</div>
+{% endblock %}

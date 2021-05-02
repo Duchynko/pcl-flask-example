@@ -1,0 +1,64 @@
+<!-- Extend the base template -->
+{% extends "base.html" %}
+
+<!-- Title block -->
+{% block title %}Store{% endblock %}
+
+<!-- Content block -->
+{% block content %}
+<div class="row">
+  <div class="col-4">
+    <img src="static/coffee-side.jpeg" alt="coffee" class="img-fluid" />
+  </div>
+  <div class="col-8">
+    <form action="/order" method="POST">
+      <div class="row align-items-center">
+        <div class="col"><h5>Name</h5></div>
+        <div class="col"><h5>Amount</h5></div>
+        <div class="col"><h5>Size</h5></div>
+        <div class="col text-end"><h5>Price (S / M / L)</h5></div>
+      </div>
+      {% for item in menu %}
+      <div class="row my-2 align-items-center">
+        <div class="col">
+          <label for="{{ item.name }}" class="col-form-label"
+            >{{ item.name }}</label
+          >
+        </div>
+        <div class="col">
+          <input
+            type="number"
+            id="{{ item.name }}"
+            name="{{ item.name }}"
+            class="form-control"
+            value="0"
+            aria-describedby="{{ item.name }}-price"
+          />
+        </div>
+        <div class="col">
+          <select
+            class="form-select"
+            name="{{ item.name }}-size"
+            id="{{ item.name }}-size"
+          >
+            <option value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+          </select>
+        </div>
+        <div class="col text-end">
+          <span id="{{ item.name }}-price" class="form-text">
+            {{ item.prices.small }} / {{ item.prices.medium}} / {{
+            item.prices.large}} DKK
+          </span>
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
